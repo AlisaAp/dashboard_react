@@ -1,0 +1,13 @@
+.sidebar_custom {
+    height: calc(100vh - 56px)
+}
+.sidenav_header {
+    margin: 20px;
+}
+.sidenav_header-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+.sidenav-container {
+    transition: linear 0.1s;
+}

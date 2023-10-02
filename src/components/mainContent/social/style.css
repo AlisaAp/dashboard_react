@@ -1,0 +1,7 @@
+.social-container{
+    display: flex;
+    align-items: center;
+}
+.social-container span {
+    flex: 50%;
+}
