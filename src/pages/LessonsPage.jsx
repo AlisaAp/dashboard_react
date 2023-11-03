@@ -1,12 +1,13 @@
 import React from 'react';
-import { Col, Row } from "rsuite";
+import { Row } from "rsuite";
 import DefaultTemplate from "../templates/DefaultTemplate";
+import Lessons from "../components/lessons/Lessons";
 
 function LessonsPage() {
   return (
     <DefaultTemplate>
       <Row gutter={60}>
-        <Col xs={16} />
+        <Lessons />
       </Row>
     </DefaultTemplate>
   );

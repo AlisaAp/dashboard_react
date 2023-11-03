@@ -19,21 +19,27 @@ const articlesApi = apiBase.injectEndpoints({
     }),
     getArticleById: build.query({
       query: (id) => `/articles/${id}`,
-      invalidatesTags: (result, error, id) => [{
+      providesTags: (result, error, id) => [{
         type: 'Articles', id,
       }],
     }),
     getArticleByCategory: build.query({
       query: (category) => `articles?category=${category}`,
-      invalidatesTags: (result, error, id) => [{
-        type: 'Articles', id,
-      }],
+      providesTags: (result) => (result
+        ? [
+          ...result.map(({ id }) => ({
+            type: 'Articles', id,
+          })),
+          {
+            type: 'Articles', id: 'LIST',
+          },
+        ]
+        : [{
+          type: 'Articles', id: 'LIST',
+        }]),
     }),
-    getArticleByTitle: build.query({
-      query: (title) => `articles?title=${title}`,
-      invalidatesTags: (result, error, id) => [{
-        type: 'Articles', id,
-      }],
+    getUsersFavArticles: build.query({
+      query: (id) => `users/${id}/favorites/${id}`,
     }),
     createArticle: build.mutation({
       query: (body) => ({
@@ -44,8 +50,8 @@ const articlesApi = apiBase.injectEndpoints({
         method: 'Post',
         body,
       }),
-      invalidatesTags: (result, error, id) => [{
-        type: 'Articles', id,
+      invalidatesTags: [{
+        type: 'Articles', id: 'LIST',
       }],
     }),
     deleteArticle: build.mutation({
@@ -56,8 +62,21 @@ const articlesApi = apiBase.injectEndpoints({
         },
         method: 'Delete',
       }),
-      invalidatesTags: (result, error, id) => [{
-        type: 'Articles', id,
+      invalidatesTags: [{
+        type: 'Articles', id: 'LIST',
+      }],
+    }),
+    addArticleToFavorite: build.mutation({
+      query: (body) => ({
+        url: `users/1/favorites/1`,
+        headers: {
+          'content-type': 'application/json',
+        },
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: [{
+        type: 'Articles', id: 'LIST',
       }],
     }),
   }),
@@ -68,7 +87,8 @@ export const {
   useGetArticlesQuery,
   useGetArticleByIdQuery,
   useGetArticleByCategoryQuery,
-  useGetArticleByTitleQuery,
+  useGetUsersFavArticlesQuery,
+  useAddArticleToFavoriteMutation,
   useCreateArticleMutation,
   useDeleteArticleMutation,
 } = articlesApi;

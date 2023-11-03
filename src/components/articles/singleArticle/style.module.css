@@ -1,0 +1,41 @@
+
+.container {
+    margin-bottom: 60px;
+    max-height: 100%
+}
+.image {
+    width: 50%;
+}
+
+.category {
+    margin-right: auto;
+}
+
+.title {
+    margin: 15px 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.date {
+    color: #6b37f6;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    gap: 10px;
+}
+
+.date > p {
+    color: gray;
+    font-weight: 700;
+
+}
+
+.description {
+    text-align: justify;
+    height: 80px;
+    overflow: hidden;
+}
+.text {
+    text-align: justify;
+}

@@ -2,8 +2,8 @@ import React from "react";
 import { Col, Loader, Row } from "rsuite";
 import { useParams } from "react-router-dom";
 import DefaultTemplate from "../../templates/DefaultTemplate";
-import ArticlesItem from "../../components/articles/ArticlesItem";
 import { useGetArticleByIdQuery } from "../../store/api/articlesApi";
+import SingleArticle from "../../components/articles/singleArticle/SingleArticle";
 
 function SingleArticlePage() {
   const articleId = useParams().id;
@@ -13,7 +13,7 @@ function SingleArticlePage() {
     <DefaultTemplate>
       <Row>
         <Col>
-          <ArticlesItem
+          <SingleArticle
             article={data}
           />
         </Col>

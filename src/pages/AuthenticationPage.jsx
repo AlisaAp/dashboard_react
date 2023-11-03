@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import AuthenticationTemplate from "../templates/AuthenticationTemplate";
-import Authentication from "../components/form/Authentication";
+import Authentication from "../components/authentication/Authentication";
 
 function AuthenticationPage() {
   return (

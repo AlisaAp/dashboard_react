@@ -1,13 +1,14 @@
 import React from 'react';
-import './style.css';
 import { useSelector, useDispatch } from "react-redux";
 import { Sidenav, Nav, Affix } from "rsuite";
 import { Link } from "react-router-dom";
+import s from './style.module.css';
 import { setActiveKey } from "../../store/slices/sidebar";
-import SidebarHeader from "./SidebarHeader";
-import ReactIcon from "../icons/categories/ReactIcon";
-import JavascriptIcon from "../icons/categories/JavascriptIcon";
+import SidebarHeader from "./sidebarHeader/SidebarHeader";
 import HomeIcon from "../icons/HomeIcon";
+import { useGetUserByIdQuery } from "../../store/api/usersApi";
+import NavMenuItem from "./NavMenuItem";
+import { useGetCoursesByUserIdQuery } from "../../store/api/coursesApi";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -17,94 +18,51 @@ function Sidebar() {
   const handleSelect = (eventKey) => {
     dispatch(setActiveKey(eventKey));
   };
-
+  const userId = useSelector((state) => state.authentication.currentUser);
+  const { data } = useGetUserByIdQuery(userId);
+  const { data: courses, isLoading } = useGetCoursesByUserIdQuery(userId);
+  if (isLoading) return null;
   return (
     <Affix top={56}>
       <div
-        className="sidenav-container"
+        className={s.container}
         style={expanded ? {
-				  width: 240,
+          width: 240,
         } : {
-				  width: 70,
+          width: 70,
         }}
       >
 
         <Sidenav
           expanded={expanded}
-          className="sidebar_custom"
+          className={s.sidebar}
           appearance="subtle"
         >
-          {expanded && <SidebarHeader />}
+          {expanded && <SidebarHeader userName={data && data.userName} />}
           <Sidenav.Body>
             <Nav activeKey={activeKey} onSelect={handleSelect}>
               <Nav.Item
+                className={s.item}
                 eventKey="1"
                 as={Link}
                 to="/"
                 icon={(
                   <HomeIcon />
-								)}
+                                )}
               >
                 Dashboard
               </Nav.Item>
-              <Nav.Menu
-                placement="rightStart"
-                eventKey="2"
-                title="Js course"
-                icon={(
-                  <JavascriptIcon />
-								)}
-              >
-                <Nav.Item
-                  eventKey="2-1"
-                  as={Link}
-                  to="/js-course/lessons/"
-                >
-                  Уроки
-                </Nav.Item>
-                <Nav.Item
-                  eventKey="2-2"
-                  as={Link}
-                  to="/js-course/homeworks/"
-                >
-                  Домашки
-                </Nav.Item>
-              </Nav.Menu>
-              <Nav.Menu
-                placement="rightStart"
-                eventKey="3"
-                title="React course"
-                icon={(
-                  <ReactIcon />
-								)}
-              >
-                <Nav.Item
-                  eventKey="3-1"
-                  as={Link}
-                  to="/react-course/lessons/"
-                >
-                  Уроки
-                </Nav.Item>
-                <Nav.Item
-                  eventKey="3-2"
-                  as={Link}
-                  to="/react-course/homeworks/"
-                >
-                  Домашки
-                </Nav.Item>
-              </Nav.Menu>
+              {courses ? courses.map(({ title, id }) => (<NavMenuItem title={title} id={id} />))
+                : null}
               <hr />
-              <Nav.Item eventKey="4" as={Link} to="/articles/all">
-                Тематические статьи
+              <Nav.Item className={s.item} eventKey="4" as={Link} to="/articles/all">
+                Articles
               </Nav.Item>
-
               <hr />
             </Nav>
           </Sidenav.Body>
         </Sidenav>
-
       </div>
-
     </Affix>
 
   );

@@ -7,20 +7,17 @@
     flex-direction: row;
 }
 
-.rs-navbar-subtle {
-    background-color: #e2f5f5;
-}
 
 .rs-content {
-    background-color: #D2E9E9;
-    padding: 60px;
+    background-color: #f3f1f1;
+    padding: 30px 60px;
 }
 
 .rs-panel {
     background-color: white;
     transition: linear 0.3s;
     border-radius: 9px;
-    max-height: 100%
+  margin-top: 30px;
 }
 
 .rs-panel-title {
@@ -32,17 +29,10 @@
     box-shadow: 0px 0px 12px 4px rgb(243, 212, 212);
 }
 
-.content-container {
-    margin-bottom: 60px;
-    max-height: 100%
-}
-
-.rs-col {
-    height: 100%;
-}
 
 .auth-container {
     background-color: #D2E9E9;
     height: 100vh;
     position: relative;
 }
+

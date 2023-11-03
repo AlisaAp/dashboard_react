@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const authentication = createSlice({
   initialState: {
-    currentUser: 2,
+    currentUser: 1,
     isLoggined: true,
-    isAdmin: false,
+    isAdmin: true,
   },
   name: "authentication",
   reducers: {

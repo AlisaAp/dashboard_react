@@ -7,6 +7,7 @@ export const apiBase = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: API_BASE_URL,
   }),
+  tagTypes: ['Articles', 'User'],
   endpoints: () => ({
   }),
 

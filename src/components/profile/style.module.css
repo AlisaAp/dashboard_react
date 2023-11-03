@@ -1,0 +1,39 @@
+.profile > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.form {
+    order: 1;
+    flex-grow: 1;
+}
+
+.avatarBox {
+    border-radius: 12px;
+    overflow: hidden;
+    order: 2;
+}
+
+.avatar {
+    max-width: 100%;
+    height: auto;
+}
+.radio{
+    display: flex;
+    width: 200px;
+}
+@media screen and (max-width: 768px) {
+    .profile > div {
+        flex-direction: column;
+    }
+
+    .avatarBox {
+        order: 1;
+    }
+    .form {
+        order: 2;
+    }
+
+}
