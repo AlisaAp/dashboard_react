@@ -3,16 +3,18 @@ import Chart from "react-apexcharts";
 import { Panel } from "rsuite";
 import PropTypes from "prop-types";
 import { useGetHomeworkResultsByCourseQuery } from "../../store/api/homeworksApi";
+import { useGetCourseByIdQuery } from "../../store/api/coursesApi";
 
 function HomeworksRating({ userId, courseId }) {
   const { data: homeworkResults, isLoading } = useGetHomeworkResultsByCourseQuery({
     userId, courseId,
   });
-  if (isLoading) return null;
+  const { data: course, isLoading: isFetching } = useGetCourseByIdQuery(courseId);
+  if (isLoading || isFetching) return null;
   const doneHomeworks = homeworkResults.filter((item) => item.status !== '');
   const categories = homeworkResults.map((item) => item.homeworkId);
   const grades = doneHomeworks.map((item) => item.grade);
-
+  const { title } = course;
   const defaultOptions = {
     series: [{
       name: 'points',
@@ -47,10 +49,13 @@ function HomeworksRating({ userId, courseId }) {
       },
       xaxis: {
         categories,
+        title: {
+          text: `${title} course`,
+        },
       },
       yaxis: {
         title: {
-          text: 'grade',
+          text: 'points',
         },
       },
       fill: {

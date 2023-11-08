@@ -13,9 +13,9 @@ function NavMenuItem({ userCourses }) {
   return (
     usersCourses.map(({ title, id }) => (
       <Nav.Menu
-        key={+id}
+        key={id}
         placement="rightStart"
-        eventKey={`${id}`}
+        eventKey={id}
         title={title}
         icon={(
                   title === 'Javascript' ? <JavascriptIcon /> : <ReactIcon />

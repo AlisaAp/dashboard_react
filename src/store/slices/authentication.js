@@ -4,7 +4,7 @@ const authentication = createSlice({
   initialState: {
     currentUser: 2,
     isLoggined: true,
-    isAdmin: true,
+    isAdmin: false,
   },
   name: "authentication",
   reducers: {

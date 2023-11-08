@@ -15,7 +15,7 @@ function HomeworkStatus({ homeworkId }) {
   if (status === "checked") return <Tag className={s.grade} color="green">{grade}</Tag>;
   if (status === "checking") return <Tag className={s.grade} color="yellow">checking</Tag>;
   return (
-    <Tag className={s.grade}>not done</Tag>
+    <Tag className={s.grade} color="orange">not done</Tag>
   );
 }
 

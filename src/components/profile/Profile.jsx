@@ -18,18 +18,19 @@ function Profile() {
     <Panel bordered className={s.profile}>
       <Formik
         initialValues={{
-				  name: userData.name,
-				  surname: userData.surname,
-				  city: userData.city,
-				  birthDate: userData.birthDate,
-				  phone: userData.phone,
-				  gender: userData.gender,
+          name: userData.name,
+          surname: userData.surname,
+          city: userData.city,
+          birthDate: userData.birthDate,
+          phone: userData.phone,
+          gender: userData.gender,
+          avatar: userData.avatar,
         }}
         onSubmit={(values) => {
-				  updateUserProfile({
-				    id,
-				    userData: values,
-				  }).unwrap();
+          updateUserProfile({
+            id,
+            userData: values,
+          }).unwrap();
         }}
       >
         {(props) => (
@@ -89,7 +90,7 @@ function Profile() {
               <input
                 defaultValue="male"
                 style={{
-								  width: "100%",
+                  width: "100%",
                 }}
                 type="radio"
                 name="gender"
@@ -100,7 +101,7 @@ function Profile() {
               <input
                 defaultValue="female"
                 style={{
-								  width: "100%",
+                  width: "100%",
                 }}
                 type="radio"
                 name="gender"
