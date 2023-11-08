@@ -2,14 +2,14 @@ import { apiBase } from "./index";
 
 const coursesApi = apiBase.injectEndpoints({
   endpoints: (build) => ({
-    getCoursesByUserId: build.query({
-      query: (userId) => `/users/${userId}/courses`,
+    getCourses: build.query({
+      query: () => `/courses`,
     }),
     getCourseById: build.query({
-      query: ({ userId, courseId }) => `/users/${userId}/courses/${courseId}`,
+      query: (courseId) => `/courses/${courseId}`,
     }),
   }),
   overrideExisting: false,
 });
 
-export const { useGetCoursesByUserIdQuery, useGetCourseByIdQuery } = coursesApi;
+export const { useGetCoursesQuery, useGetCourseByIdQuery } = coursesApi;

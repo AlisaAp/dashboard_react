@@ -1,21 +1,18 @@
 import React from 'react';
-import { Row, Col } from "rsuite";
+import { Col, Row } from "rsuite";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import DefaultTemplate from "../../templates/DefaultTemplate";
+import Lessons from "../../components/lessons/Lessons";
 import GroupList from "../../components/dashboard/groupList/GroupList";
-import SingleHomework from "../../components/homeworks/singleHomework/SingleHomework";
 
-function SingleHomeworkPage() {
+function LessonsPage() {
   const courseId = useParams().id;
-  const homeworkId = useParams().hwId;
 
-  const userId = useSelector((state) => state.authentication.currentUser);
   return (
     <DefaultTemplate>
       <Row gutter={60}>
         <Col xl={18} lg={16}>
-          <SingleHomework courseId={courseId} userId={userId} homeworkId={homeworkId} />
+          <Lessons courseId={courseId} />
         </Col>
         <Col xl={6} lg={8} mdHidden>
           <GroupList courseId={courseId} />
@@ -25,4 +22,4 @@ function SingleHomeworkPage() {
   );
 }
 
-export default SingleHomeworkPage;
+export default LessonsPage;

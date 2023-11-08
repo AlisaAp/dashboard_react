@@ -9,20 +9,21 @@ import Complexity from "./complexity/Complexity";
 function HomeworkItem({ userHomework, openBtn }) {
   const courseTitle = useParams().courses;
   const {
-    homeworkData,
-    status,
-    score,
+    title,
+    finishDate,
+    complexity,
+    description,
     id,
     courseId,
   } = userHomework;
-  const { title, description, finishDate, complexity } = homeworkData;
+
   return (
     <>
       <div className={s.header}>
         <div className={s.title}>
           {`${id}. ${title}`}
         </div>
-        <HomeworkStatus status={status} score={score} />
+        <HomeworkStatus homeworkId={id} />
       </div>
       <div className={s.date_section}>
         <p>Pass before:</p>
@@ -52,15 +53,10 @@ function HomeworkItem({ userHomework, openBtn }) {
 
 HomeworkItem.propTypes = {
   userHomework: PropTypes.shape({
-    homeworkData: PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string,
-      complexity: PropTypes.number,
-      finishDate: PropTypes.string,
-    }),
-    status: PropTypes.string,
-    link: PropTypes.string,
-    score: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    complexity: PropTypes.number,
+    finishDate: PropTypes.string,
     id: PropTypes.string,
     courseId: PropTypes.string,
   }),

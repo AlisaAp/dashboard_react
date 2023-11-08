@@ -1,11 +1,16 @@
 import React from 'react';
 import { Button, ButtonGroup, Col, Divider, Panel, Progress } from "rsuite";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import s from "./style.module.css";
+import { useGetCoursesQuery } from "../../../store/api/coursesApi";
 
 function ActiveCourses({ courses, activeCourse, handleClick }) {
+  const { data: coursesData, isLoading } = useGetCoursesQuery();
+  if (isLoading) return null;
+  const usersCourses = coursesData.filter((e) => courses.includes(+e.id));
   return (
-    courses.map(({ title, id, persent, startDate }) => (
+    usersCourses.map(({ title, id, persent, startDate }) => (
       <Col md={12} sm={12} key={id} className={s.container}>
         <Panel
           className={activeCourse === id ? `${s.card} ${s.active}` : s.card}
@@ -42,5 +47,9 @@ function ActiveCourses({ courses, activeCourse, handleClick }) {
     ))
   );
 }
-
+ActiveCourses.propTypes = {
+  activeCourse: PropTypes.string.isRequired,
+  courses: PropTypes.arrayOf(PropTypes.number),
+  handleClick: PropTypes.func.isRequired,
+};
 export default ActiveCourses;

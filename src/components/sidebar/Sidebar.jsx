@@ -8,7 +8,6 @@ import SidebarHeader from "./sidebarHeader/SidebarHeader";
 import HomeIcon from "../icons/HomeIcon";
 import { useGetUserByIdQuery } from "../../store/api/usersApi";
 import NavMenuItem from "./NavMenuItem";
-import { useGetCoursesByUserIdQuery } from "../../store/api/coursesApi";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -19,9 +18,10 @@ function Sidebar() {
     dispatch(setActiveKey(eventKey));
   };
   const userId = useSelector((state) => state.authentication.currentUser);
-  const { data } = useGetUserByIdQuery(userId);
-  const { data: courses, isLoading } = useGetCoursesByUserIdQuery(userId);
+  const { data: user, isLoading } = useGetUserByIdQuery(userId);
   if (isLoading) return null;
+  const { userData, courses } = user;
+  const userName = `${userData.name} ${userData.surname}`;
   return (
     <Affix top={56}>
       <div
@@ -38,7 +38,7 @@ function Sidebar() {
           className={s.sidebar}
           appearance="subtle"
         >
-          {expanded && <SidebarHeader userName={data && data.userName} />}
+          {expanded && <SidebarHeader userName={userName} />}
           <Sidenav.Body>
             <Nav activeKey={activeKey} onSelect={handleSelect}>
               <Nav.Item
@@ -52,7 +52,7 @@ function Sidebar() {
               >
                 Dashboard
               </Nav.Item>
-              {courses ? courses.map(({ title, id }) => (<NavMenuItem title={title} id={id} />))
+              {courses ? <NavMenuItem userCourses={courses} />
                 : null}
               <hr />
               <Nav.Item className={s.item} eventKey="4" as={Link} to="/articles/all">

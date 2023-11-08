@@ -11,7 +11,7 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {
-    // indent: 'off',
+    'no-plusplus': 'off',
     "object-curly-spacing": ["error", "always"],
     "react/require-default-props": "off",
     "no-mixed-spaces-and-tabs": 0,

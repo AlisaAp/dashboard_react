@@ -1,35 +1,35 @@
-
-.container {
-    margin-bottom: 60px;
-    max-height: 100%
+.lesson {
+    text-align: start;
+    cursor: pointer;
 }
-.item {
-    height: 380px;
-    margin-bottom: 15px;
-}
-
-.category {
+.header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
-
 
 .title {
-    margin: 15px 0;
+    font-weight: 700;
     font-size: 18px;
-    font-weight: 700;
+    color: #737272;
 }
 
-.date {
-    color: #6b37f6;
+.grade {
+    width: 40px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.date_section {
+    margin-top: 40px;
     display: flex;
+    gap: 3px;
     align-items: center;
-    font-size: 16px;
-    gap: 10px;
 }
 
-.date > p {
-    color: gray;
-    font-weight: 700;
-
+.date_section > p {
+    padding-right: 5px;
 }
+.video {
+   text-align: center;
+}
+

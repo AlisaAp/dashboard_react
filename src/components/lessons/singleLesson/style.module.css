@@ -1,0 +1,13 @@
+.lesson {
+    text-align: start;
+    cursor: pointer;
+}
+.video {
+   text-align: center;
+}
+.title {
+    font-weight: 700;
+}
+.homeworks{
+    margin-bottom: 20px;
+}

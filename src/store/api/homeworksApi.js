@@ -3,7 +3,7 @@ import { apiBase } from "./index";
 const homeworksApi = apiBase.injectEndpoints({
   endpoints: (build) => ({
     getHomeworksByCourse: build.query({
-      query: ({ userId, courseId }) => `/users/${userId}/courses/${courseId}/homeworks`,
+      query: (courseId) => `/courses/${courseId}/homeworks`,
       providesTags: (result) => (result
         ? [
           ...result.map(({ id }) => ({
@@ -33,15 +33,29 @@ const homeworksApi = apiBase.injectEndpoints({
         }]),
     }),
     getHomeworkById: build.query({
-      query: ({ userId, courseId, homeworkId }) => `/users/${userId}/courses/${courseId}/homeworks/${homeworkId}`,
+      query: ({ courseId, homeworkId }) => `/courses/${courseId}/homeworks/${homeworkId}`,
+      providesTags: () => [{
+        type: 'Homeworks', id: "LIST",
+      }],
+
+    }),
+    getHomeworkResultById: build.query({
+      query: ({ userId, homeworkId }) => `/users/${userId}/homeworks/${homeworkId}`,
+      providesTags: () => [{
+        type: 'Homeworks', id: "LIST",
+      }],
+
+    }),
+    getHomeworkResultsByCourse: build.query({
+      query: ({ userId, courseId }) => `/users/${userId}/homeworks?courseId=${courseId}`,
       providesTags: () => [{
         type: 'Homeworks', id: "LIST",
       }],
 
     }),
     sendHomeworkById: build.mutation({
-      query: ({ userId, courseId, homeworkId, ...patch }) => ({
-        url: `/users/${userId}/courses/${courseId}/homeworks/${homeworkId}`,
+      query: ({ userId, homeworkId, ...patch }) => ({
+        url: `/users/${userId}/homeworks/${homeworkId}`,
         headers: {
           'content-type': 'application/json',
         },
@@ -59,6 +73,8 @@ const homeworksApi = apiBase.injectEndpoints({
 export const {
   useGetHomeworkByIdQuery,
   useGetHomeworksByCourseQuery,
+  useGetHomeworkResultByIdQuery,
+  useGetHomeworkResultsByCourseQuery,
   useGetUsersCheckedHomeworksQuery,
   useSendHomeworkByIdMutation,
 } = homeworksApi;

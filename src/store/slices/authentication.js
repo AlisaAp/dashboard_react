@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const authentication = createSlice({
   initialState: {
-    currentUser: 1,
+    currentUser: 2,
     isLoggined: true,
     isAdmin: true,
   },

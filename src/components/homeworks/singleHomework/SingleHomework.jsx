@@ -27,11 +27,10 @@ function SingleHomework({ courseId, homeworkId, userId }) {
     onSubmit: (values, actions) => {
       sendHomework({
         userId,
-        courseId,
         homeworkId,
         link: values.homework,
         status: 'checking',
-        score: 0,
+        grade: 0,
       }).unwrap();
       actions.resetForm();
       handleClose();

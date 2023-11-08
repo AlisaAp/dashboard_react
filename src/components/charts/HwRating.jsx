@@ -2,10 +2,28 @@ import React from 'react';
 import Chart from "react-apexcharts";
 import { Panel } from "rsuite";
 import PropTypes from "prop-types";
-import { useGetUsersCheckedHomeworksQuery } from "../../store/api/homeworksApi";
+import { useGetHomeworkResultsByCourseQuery } from "../../store/api/homeworksApi";
+
+function averageGrades(homeworkResults) {
+  const grades = homeworkResults.map((item) => item.grade);
+  // const grades = [];
+  // homeworkResults.forEach((homework) => {
+  //   grades.push(homework.grade);
+  // });
+  const gradesLength = grades.length;
+  const one = grades.filter((grade) => grade < 50).length;
+  const resOne = (one / gradesLength) * 100;
+  const two = grades.filter((grade) => (grade >= 50 && grade < 70)).length;
+  const resTwo = (two / gradesLength) * 100;
+  const three = grades.filter((grade) => (grade >= 70 && grade < 85)).length;
+  const resThree = (three / gradesLength) * 100;
+  const fore = grades.filter((grade) => (grade >= 85 && grade < 100)).length;
+  const resFore = (fore / gradesLength) * 100;
+  return [resOne, resTwo, resThree, resFore];
+}
 
 const defaultOptions = {
-  series: [80, 10, 10],
+  series: [0, 0, 0],
   options: {
     chart: {
       width: 380,
@@ -23,14 +41,11 @@ const defaultOptions = {
     fill: {
       type: 'gradient',
     },
-    colors: ['#33ef4a', '#f8d727', '#f57474'],
+    colors: ['#f57474', '#f6b526', '#9be84e', '#25ef5d'],
     legend: {
       formatter(val, opts) {
         return `${val} - ${opts.w.globals.series[opts.seriesIndex]}%`;
       },
-    },
-    title: {
-      text: 'Homeworks rating',
     },
     responsive: [{
       breakpoint: 480,
@@ -47,19 +62,17 @@ const defaultOptions = {
 };
 
 function HwRating({ userId, courseId }) {
-  const { data: homeworks, isLoading } = useGetUsersCheckedHomeworksQuery({
+  const { data: homeworkResults, isLoading } = useGetHomeworkResultsByCourseQuery({
     userId, courseId,
   });
   if (isLoading) return null;
-  const scoreAll = [];
-  homeworks.forEach((homework) => {
-    scoreAll.push(homework.score);
-  });
+  const checkedHomeworks = homeworkResults.filter((item) => item.status === 'checked');
+  const series = averageGrades(checkedHomeworks);
   return (
     <Panel>
       <Chart
         options={defaultOptions.options}
-        series={defaultOptions.series}
+        series={checkedHomeworks.length ? series : defaultOptions.series}
         type="donut"
         height={350}
       />
@@ -70,6 +83,6 @@ function HwRating({ userId, courseId }) {
 
 HwRating.propTypes = {
   courseId: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 export default HwRating;

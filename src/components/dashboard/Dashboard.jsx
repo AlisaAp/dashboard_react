@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Col, Row, Placeholder } from "rsuite";
 import { useSelector } from "react-redux";
 import ActiveCourses from "./courses/ActiveCourses";
-import HwRating from "../charts/HwRating";
-import { useGetCoursesByUserIdQuery } from "../../store/api/coursesApi";
+// import HwRating from "../charts/HwRating";
 import GroupList from "./groupList/GroupList";
+import { useGetUserByIdQuery } from "../../store/api/usersApi";
+import HomeworksRating from "../charts/HomeworksRating";
 
 function Dashboard() {
   const [activeCourse, setActiveCourse] = useState("1");
   const userId = useSelector((state) => state.authentication.currentUser);
-  const { data: courses, isLoading } = useGetCoursesByUserIdQuery(userId);
+  const { data: userData, isLoading } = useGetUserByIdQuery(userId);
+
   const handleClick = (id) => {
     setActiveCourse(id);
   };
@@ -31,7 +33,7 @@ function Dashboard() {
       </Row>
     );
   }
-
+  const { courses } = userData;
   return (
     <Row gutter={60}>
       <Col md={18}>
@@ -46,8 +48,8 @@ function Dashboard() {
             : null}
         </Row>
         <Row gutter={60}>
-          <Col md={12}>
-            <HwRating userId={userId} courseId={activeCourse} />
+          <Col md={24}>
+            <HomeworksRating userId={userId} courseId={activeCourse} />
           </Col>
         </Row>
       </Col>
