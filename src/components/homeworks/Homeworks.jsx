@@ -42,7 +42,7 @@ function Homeworks({ courseId }) {
         <Panel bordered className={s.homework} key={item.id}>
           <HomeworkItem
             userHomework={item}
-            openBtn
+            openBtn="true"
           />
         </Panel>
       )) : null}

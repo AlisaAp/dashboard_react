@@ -38,7 +38,7 @@ function HomeworkItem({ userHomework, openBtn }) {
         {description}
       </div>
       <hr />
-      {openBtn ? (
+      {openBtn === "true" ? (
         <Button
           appearance="primary"
           as={Link}
@@ -60,6 +60,6 @@ HomeworkItem.propTypes = {
     id: PropTypes.string,
     courseId: PropTypes.string,
   }),
-  openBtn: PropTypes.bool.isRequired,
+  openBtn: PropTypes.string.isRequired,
 };
 export default HomeworkItem;

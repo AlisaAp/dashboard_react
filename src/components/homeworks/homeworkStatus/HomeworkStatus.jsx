@@ -20,6 +20,6 @@ function HomeworkStatus({ homeworkId }) {
 }
 
 HomeworkStatus.propTypes = {
-  homeworkId: PropTypes.number.isRequired,
+  homeworkId: PropTypes.string.isRequired,
 };
 export default HomeworkStatus;

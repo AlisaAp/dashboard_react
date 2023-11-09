@@ -11,7 +11,12 @@ function Complexity({ complexity }) {
   }
   return (
     percentData.map((percent) => (
-      <Progress.Line className={s.complexity} strokeWidth={6} percent={percent} showInfo={false} />
+      <Progress.Line
+        className={s.complexity}
+        strokeWidth={6}
+        percent={percent}
+        showInfo={false}
+      />
     ))
   );
 }

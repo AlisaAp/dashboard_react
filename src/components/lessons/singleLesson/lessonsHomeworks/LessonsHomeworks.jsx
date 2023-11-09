@@ -20,7 +20,7 @@ function LessonsHomeworks({ courseId, homeworkId, handleClick }) {
         {`${id}. ${title}`}
       </div>
       <div>
-        <HomeworkStatus homeworkId={homeworkId} />
+        <HomeworkStatus homeworkId={homeworkId.toString()} />
       </div>
     </Panel>
   );

@@ -14,10 +14,11 @@ import SingleLessonPage from "./pages/lessonsPage/SingleLessonPage";
 
 function App() {
   const isLoggined = useSelector((state) => state.authentication.isLoggined);
+  if (!isLoggined) return <AuthenticationPage />;
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={isLoggined ? <HomePage /> : <AuthenticationPage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="articles/:category" element={<ArticlesPage />} />
         <Route path="articles/:category/:id" element={<SingleArticlePage />} />

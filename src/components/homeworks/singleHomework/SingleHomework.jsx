@@ -44,7 +44,7 @@ function SingleHomework({ courseId, homeworkId, userId }) {
   if (isLoading) return null;
   return (
     <Panel className={s.homework}>
-      <HomeworkItem userHomework={homework} />
+      <HomeworkItem userHomework={homework} openBtn="false" />
       <Button
         appearance="primary"
         onClick={handleOpen}
