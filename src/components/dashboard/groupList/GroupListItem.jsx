@@ -10,7 +10,7 @@ function GroupListItem({ userData }) {
   return (
     <List.Item className={s.student}>
       <Avatar size="sm" circle src={avatar} alt="avatar" />
-      <p>
+      <p className={s.name}>
         {userName}
       </p>
     </List.Item>

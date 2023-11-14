@@ -2,10 +2,12 @@ import React from 'react';
 import Chart from "react-apexcharts";
 import { Panel } from "rsuite";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import { useGetHomeworkResultsByCourseQuery } from "../../store/api/homeworksApi";
 import { useGetCourseByIdQuery } from "../../store/api/coursesApi";
 
-function HomeworksRating({ userId, courseId }) {
+function HomeworksRating({ userId }) {
+  const courseId = useSelector((state) => state.dashboard.activeCourse);
   const { data: homeworkResults, isLoading } = useGetHomeworkResultsByCourseQuery({
     userId, courseId,
   });
@@ -74,7 +76,6 @@ function HomeworksRating({ userId, courseId }) {
     <Panel>
       <Chart
         options={defaultOptions.options}
-        // series={checkedHomeworks.length ? series : defaultOptions.series}
         series={defaultOptions.series}
         type="bar"
         height={350}
@@ -85,7 +86,7 @@ function HomeworksRating({ userId, courseId }) {
 }
 
 HomeworksRating.propTypes = {
-  courseId: PropTypes.string.isRequired,
+  // courseId: PropTypes.string.isRequired,
   userId: PropTypes.number.isRequired,
 };
 export default HomeworksRating;

@@ -11,6 +11,7 @@ import HomeworksPage from "./pages/homeworksPage/HomeworksPage";
 import ProfilePage from "./pages/ProfilePage";
 import SingleHomeworkPage from "./pages/homeworksPage/SingleHomeworkPage";
 import SingleLessonPage from "./pages/lessonsPage/SingleLessonPage";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   const isLoggined = useSelector((state) => state.authentication.isLoggined);
@@ -27,6 +28,7 @@ function App() {
         <Route path="/:courses/:id/lessons/:lessonId" element={<SingleLessonPage />} />
         <Route path="/:courses/:id/homeworks" element={<HomeworksPage />} />
         <Route path="/:courses/:id/homeworks/:hwId" element={<SingleHomeworkPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );

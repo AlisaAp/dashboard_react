@@ -3,7 +3,8 @@ import { Panel, Button } from "rsuite";
 import Form from "react-bootstrap/Form";
 import { useSelector } from "react-redux";
 import { Formik } from "formik";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+import * as Yup from 'yup';
 import { useUpdateUserProfileMutation, useGetUserByIdQuery } from "../../store/api/usersApi";
 import s from './style.module.css';
 
@@ -13,6 +14,14 @@ function Profile() {
   const [updateUserProfile] = useUpdateUserProfileMutation();
   if (isLoading) return null;
   const { userData } = data;
+  const ValidationSchema = Yup.object().shape({
+    phone: Yup.string()
+      .required('Required')
+      .matches(
+        /^\+380\d{9}$/,
+        "Invalid phone",
+      ),
+  });
 
   return (
     <Panel bordered className={s.profile}>
@@ -32,16 +41,17 @@ function Profile() {
             userData: values,
           }).unwrap();
         }}
+        validationSchema={ValidationSchema}
       >
-        {(props) => (
-          <Form onSubmit={props.handleSubmit} className={s.form}>
+        {({ errors, touched, values, handleSubmit, handleChange }) => (
+          <Form onSubmit={handleSubmit} className={s.form}>
             <Form.Group className="mb-3">
               <Form.Label>name</Form.Label>
               <Form.Control
                 type="text"
                 name="name"
-                value={props.values.name}
-                onChange={props.handleChange}
+                value={values.name}
+                onChange={handleChange}
                 className="form-control"
               />
             </Form.Group>
@@ -51,8 +61,8 @@ function Profile() {
                 type="text"
                 name="surname"
                 className="form-control"
-                value={props.values.surname}
-                onChange={props.handleChange}
+                value={values.surname}
+                onChange={handleChange}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -60,8 +70,8 @@ function Profile() {
               <Form.Control
                 type="text"
                 name="city"
-                value={props.values.city}
-                onChange={props.handleChange}
+                value={values.city}
+                onChange={handleChange}
                 className="form-control"
               />
             </Form.Group>
@@ -71,8 +81,8 @@ function Profile() {
                 type="date"
                 name="birthDate"
                 className="form-control"
-                value={props.values.birthDate}
-                onChange={props.handleChange}
+                value={values.birthDate}
+                onChange={handleChange}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -81,10 +91,13 @@ function Profile() {
                 type="tel"
                 name="phone"
                 className="form-control"
-                value={props.values.phone}
-                onChange={props.handleChange}
+                value={values.phone}
+                onChange={handleChange}
               />
             </Form.Group>
+            {errors.phone && touched.phone ? (
+              <div>{errors.phone}</div>
+            ) : null}
             <Form.Group className={`mb-3 ${s.radio}`}>
               <Form.Label>male</Form.Label>
               <input
@@ -94,7 +107,7 @@ function Profile() {
                 }}
                 type="radio"
                 name="gender"
-                onChange={props.handleChange}
+                onChange={handleChange}
                 checked={userData.gender === 'male' ? 'checked' : null}
               />
               <Form.Label>female</Form.Label>
@@ -105,7 +118,7 @@ function Profile() {
                 }}
                 type="radio"
                 name="gender"
-                onChange={props.handleChange}
+                onChange={handleChange}
                 checked={userData.gender === 'female' ? 'checked' : null}
               />
             </Form.Group>
@@ -127,10 +140,10 @@ function Profile() {
     </Panel>
   );
 }
-
-Profile.propTypes = {
-  values: PropTypes.objectOf(PropTypes.string),
-  handleChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-};
+//
+// Profile.propTypes = {
+//   // values: PropTypes.objectOf(PropTypes.string),
+//   // handleChange: PropTypes.func,
+//   // handleSubmit: PropTypes.func,
+// };
 export default Profile;

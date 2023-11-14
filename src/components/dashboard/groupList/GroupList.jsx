@@ -1,13 +1,15 @@
 import React from 'react';
 import { Divider, List, Panel, Placeholder } from 'rsuite';
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import { useGetCourseByIdQuery } from "../../../store/api/coursesApi";
 import GroupListItem from "./GroupListItem";
 import { useGetUsersQuery } from "../../../store/api/usersApi";
 import s from "./style.module.css";
 
-function GroupList({ courseId }) {
-  const { data: course, isLoading } = useGetCourseByIdQuery(courseId);
+function GroupList() {
+  const activeCourse = useSelector((state) => state.dashboard.activeCourse);
+  const { data: course, isLoading } = useGetCourseByIdQuery(activeCourse);
   const { data: students, isLoading: isFetching } = useGetUsersQuery();
   if (isLoading || isFetching) {
     return (
@@ -45,7 +47,7 @@ function GroupList({ courseId }) {
   );
 }
 
-GroupList.propTypes = {
-  courseId: PropTypes.string.isRequired,
-};
+// GroupList.propTypes = {
+//   // courseId: PropTypes.string.isRequired,
+// };
 export default GroupList;

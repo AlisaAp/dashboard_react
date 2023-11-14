@@ -17,7 +17,7 @@ function SingleHomeworkPage() {
         <Col xl={18} lg={16}>
           <SingleHomework courseId={courseId} userId={userId} homeworkId={homeworkId} />
         </Col>
-        <Col xl={6} lg={8} mdHidden>
+        <Col xl={6} lg={8} mdHidden xsHidden>
           <GroupList courseId={courseId} />
         </Col>
       </Row>

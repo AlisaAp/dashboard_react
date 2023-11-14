@@ -7,7 +7,7 @@ function ProfilePage() {
   return (
 
     <DefaultTemplate>
-      <Row gutter={60}>
+      <Row>
         <Profile />
       </Row>
     </DefaultTemplate>

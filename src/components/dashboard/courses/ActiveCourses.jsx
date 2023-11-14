@@ -1,55 +1,72 @@
-import React from 'react';
-import { Button, ButtonGroup, Col, Divider, Panel, Progress } from "rsuite";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Carousel, Col, DOMHelper } from "rsuite";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
 import { useGetCoursesQuery } from "../../../store/api/coursesApi";
+import CourseItem from "./CourseItem";
+import { setActiveCourse } from "../../../store/slices/dashboard";
 
-function ActiveCourses({ courses, activeCourse, handleClick }) {
+function ActiveCourses({ courses }) {
+  const dispatch = useDispatch();
+  const { getWidth, on } = DOMHelper;
+  const activeCourse = useSelector((state) => state.dashboard.activeCourse);
+  const [windowWidth, setWindowWidth] = useState(getWidth(window));
+  const [activeIndex, setActiveIndex] = React.useState(0);
   const { data: coursesData, isLoading } = useGetCoursesQuery();
+
+  const newActiveCourse = courses[0].toString();
+
+  useEffect(() => {
+    dispatch(setActiveCourse(newActiveCourse));
+
+    setWindowWidth(getWidth(window));
+    const resizeListenner = on(window, 'resize', () => setWindowWidth(getWidth(window)));
+
+    return () => {
+      resizeListenner.off();
+    };
+  }, []);
   if (isLoading) return null;
   const usersCourses = coursesData.filter((e) => courses.includes(+e.id));
+
+  if (windowWidth < 576) {
+    return (
+      <Carousel
+        className={s.carousel}
+        activeIndex={activeIndex}
+        onSelect={(index) => {
+          setActiveIndex(index);
+          dispatch(setActiveCourse(usersCourses[index].id));
+        }}
+      >
+        {usersCourses.map((course) => (
+          <Col sm={24} key={course.id}>
+            <CourseItem
+              course={course}
+              activeCourse={activeCourse}
+              clickListener={false}
+            />
+          </Col>
+        ))}
+      </Carousel>
+    );
+  }
+
   return (
-    usersCourses.map(({ title, id, persent, startDate }) => (
-      <Col md={12} sm={12} key={id} className={s.container}>
-        <Panel
-          className={activeCourse === id ? `${s.card} ${s.active}` : s.card}
-          onClick={() => handleClick(id)}
-        >
-          <div className={s.header}>
-            <p className={s.title}>{title}</p>
-            <Divider vertical />
-            <p className={s.date}>
-              {startDate}
-            </p>
-
-          </div>
-          <Progress.Line percent={persent} strokeColor="#F3D408" showInfo={false} className={s.progress} />
-          <ButtonGroup>
-            <Button
-              appearance="subtle"
-              as={Link}
-              to={`/${title}/${id}/homeworks`}
-            >
-              Homeworks
-            </Button>
-            <Button
-              appearance="subtle"
-              as={Link}
-              to={`/${title}/${id}/lessons`}
-            >
-              Lessons
-            </Button>
-          </ButtonGroup>
-
-        </Panel>
+    usersCourses.map((course) => (
+      <Col sm={12} key={course.id} className={s.container}>
+        <CourseItem
+          course={course}
+          activeCourse={activeCourse}
+          clickListener
+        />
       </Col>
     ))
   );
 }
+
 ActiveCourses.propTypes = {
-  activeCourse: PropTypes.string.isRequired,
   courses: PropTypes.arrayOf(PropTypes.number),
-  handleClick: PropTypes.func.isRequired,
 };
 export default ActiveCourses;

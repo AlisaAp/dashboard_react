@@ -7,3 +7,8 @@
     justify-content: space-between;
     background-color: rgba(187, 215, 243, 0.7);
 }
+@media screen and (max-width: 576px) {
+    .homeworks {
+        margin-top:5px
+    }
+}

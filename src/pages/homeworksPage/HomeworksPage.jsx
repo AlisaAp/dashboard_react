@@ -13,7 +13,7 @@ function HomeworksPage() {
         <Col xl={18} lg={16}>
           <Homeworks courseId={courseId} />
         </Col>
-        <Col xl={6} lg={8} mdHidden>
+        <Col xl={6} lg={8} smHidden xsHidden>
           <GroupList courseId={courseId} />
         </Col>
       </Row>

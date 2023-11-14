@@ -11,3 +11,10 @@
 .homeworks{
     margin-bottom: 20px;
 }
+
+@media screen and (max-width: 576px) {
+    .video iframe {
+        width: 250px;
+        height:auto
+    }
+}

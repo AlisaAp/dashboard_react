@@ -10,7 +10,7 @@ function HomeworkStatus({ homeworkId }) {
   const { data: homeworkResult, isLoading } = useGetHomeworkResultByIdQuery({
     userId, homeworkId,
   });
-  if (isLoading) return null;
+  if (isLoading) return <Tag className={s.grade} />;
   const { status, grade } = homeworkResult;
   if (status === "checked") return <Tag className={s.grade} color="green">{grade}</Tag>;
   if (status === "checking") return <Tag className={s.grade} color="yellow">checking</Tag>;

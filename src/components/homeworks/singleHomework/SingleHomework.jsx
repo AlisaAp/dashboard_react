@@ -3,17 +3,21 @@ import { Button, Modal, Panel } from "rsuite";
 import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 import HomeworkItem from "../HomeworkItem";
 import { useGetHomeworkByIdQuery, useSendHomeworkByIdMutation } from "../../../store/api/homeworksApi";
 import s from "../style.module.css";
 import HomeworkForm from "./HomeworkForm";
+import PlaceHolder from "../../placeHolder/PlaceHolder";
 
 function SingleHomework({ courseId, homeworkId, userId }) {
-  const { data: homework, isLoading } = useGetHomeworkByIdQuery({
+  const navigate = useNavigate();
+  const { data: homework, isLoading, error } = useGetHomeworkByIdQuery({
     userId, courseId, homeworkId,
   });
   const [open, setOpen] = React.useState(false);
   const [sendHomework] = useSendHomeworkByIdMutation();
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -41,7 +45,14 @@ function SingleHomework({ courseId, homeworkId, userId }) {
     }),
   });
 
-  if (isLoading) return null;
+  if (isLoading) {
+    return (
+      <PlaceHolder height={400} />
+    );
+  }
+  if (error) {
+    return navigate('/');
+  }
   return (
     <Panel className={s.homework}>
       <HomeworkItem userHomework={homework} openBtn="false" />

@@ -1,0 +1,19 @@
+.errorPage {
+    display: flex;
+    height: 100vh;
+    margin-top: -40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.code {
+    color: blue;
+}
+
+.img {
+    height: 260px;
+}
+
+.text {
+    text-align: center;
+}

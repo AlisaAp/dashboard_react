@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Panel, Placeholder, Row } from "rsuite";
+import { Panel } from "rsuite";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { useGetHomeworkResultsByCourseQuery,
@@ -7,6 +7,7 @@ import { useGetHomeworkResultsByCourseQuery,
 import HomeworkItem from "./HomeworkItem";
 import s from "./style.module.css";
 import FilterHomeworks from "./filterHomeworks/FilterHomeworks";
+import PlaceHolder from "../placeHolder/PlaceHolder";
 
 function filterHomeworks(homeworks, homeworkResults, filter) {
   const filteredResults = (filter === 'all') ? homeworkResults : homeworkResults.filter((item) => item.status === filter);
@@ -21,15 +22,8 @@ function Homeworks({ courseId }) {
   const { data: homeworkResults, isLoading: isFetching } = useGetHomeworkResultsByCourseQuery({
     userId, courseId,
   });
-  if (isLoading || isFetching) {
-    return (
-      <Row gutter={30}>
-        <Col xs={24}>
-          <Placeholder.Graph active height={400} />
-        </Col>
-      </Row>
-    );
-  }
+  if (isLoading || isFetching) return <PlaceHolder height={400} />;
+
   const handleClick = (status) => {
     setFilter(status);
   };

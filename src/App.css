@@ -1,5 +1,6 @@
 .App {
     text-align: center;
+    font-size: 0.8rem;
 }
 
 .main-container {
@@ -28,11 +29,24 @@
 .rs-panel:hover {
     box-shadow: 0px 0px 12px 4px rgb(243, 212, 212);
 }
-
-
+.rs-carousel-placement-bottom .rs-carousel-toolbar {
+    bottom: 5px;
+}
+.rs-carousel-slider-after, .rs-carousel-slider-item {
+    background: transparent;
+}
 .auth-container {
     background-color: #D2E9E9;
     height: 100vh;
     position: relative;
 }
 
+@media screen and (max-width: 768px) {
+    .rs-content {
+        padding: 10px 20px;
+    }
+    .rs-panel {
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+}

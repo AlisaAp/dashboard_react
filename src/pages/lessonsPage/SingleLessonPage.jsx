@@ -15,7 +15,7 @@ function SingleLessonPage() {
         <Col xl={18} lg={16}>
           <SingleLesson courseId={courseId} lessonId={lessonId} />
         </Col>
-        <Col xl={6} lg={8} mdHidden>
+        <Col xl={6} lg={8} smHidden xsHidden>
           <GroupList courseId={courseId} />
         </Col>
       </Row>
