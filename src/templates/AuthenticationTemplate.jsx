@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container } from "rsuite";
+import { Container, Content } from "rsuite";
 
 function AuthenticationTemplate({ children }) {
   return (
-    <Container className="auth-container">
-      {children}
+    <Container>
+      <Content className="auth-container">
+        {children}
+      </Content>
     </Container>
   );
 }

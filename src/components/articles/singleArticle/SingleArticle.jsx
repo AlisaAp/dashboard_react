@@ -23,7 +23,6 @@ function SingleArticle({ article }) {
       <div className={s.text}>
         {description}
       </div>
-
     </Panel>
   );
 }

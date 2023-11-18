@@ -1,6 +1,5 @@
 import React from 'react';
 import { Divider, List, Panel, Placeholder } from 'rsuite';
-// import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useGetCourseByIdQuery } from "../../../store/api/coursesApi";
 import GroupListItem from "./GroupListItem";
@@ -47,7 +46,4 @@ function GroupList() {
   );
 }
 
-// GroupList.propTypes = {
-//   // courseId: PropTypes.string.isRequired,
-// };
 export default GroupList;

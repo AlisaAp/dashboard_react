@@ -49,7 +49,6 @@ function NewArticle() {
           <ArticleForm
             formik={formik}
             handleClose={handleClose}
-
           />
         </Modal.Body>
         <Modal.Footer>
@@ -61,7 +60,6 @@ function NewArticle() {
       <Panel bordered shaded className={s.container}>
         <Button onClick={handleOpen}>Add new article</Button>
       </Panel>
-
     </>
   );
 }

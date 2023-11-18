@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import { Link, useNavigate } from "react-router-dom";
 import StarIcon from '@rsuite/icons/legacy/Star';
 import { useSelector } from "react-redux";
-// import button from "bootstrap/js/src/button";
 import s from './style.module.css';
-// import { useDeleteArticleMutation } from "../../../store/api/articlesApi";
 
 function ArticlesItem({ article, removeArticle }) {
   const { category, title, publicationDate, description, id, image } = article;
@@ -32,17 +30,13 @@ function ArticlesItem({ article, removeArticle }) {
           size="md"
           icon={<StarIcon />}
           color="orange"
-          // appearance={favorite ? `primary` : null}
-          // onClick={addToFavorite(id)}
         />
       </div>
       <div className={s.title}>
         <button type="button" onClick={openArticle} onKeyDown={openArticle}>
           {title}
         </button>
-
       </div>
-
       <hr />
       <div className={s.date}>
         <p>
@@ -71,9 +65,7 @@ function ArticlesItem({ article, removeArticle }) {
             </Button>
           ) : null}
         </ButtonGroup>
-
       </ButtonToolbar>
-
     </Panel>
   );
 }

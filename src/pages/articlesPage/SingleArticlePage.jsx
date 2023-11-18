@@ -18,7 +18,6 @@ function SingleArticlePage() {
           />
         </Col>
       </Row>
-
     </DefaultTemplate>
   );
 }

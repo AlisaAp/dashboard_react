@@ -3,7 +3,6 @@ import { Panel, Button } from "rsuite";
 import Form from "react-bootstrap/Form";
 import { useSelector } from "react-redux";
 import { Formik } from "formik";
-// import PropTypes from "prop-types";
 import * as Yup from 'yup';
 import { useUpdateUserProfileMutation, useGetUserByIdQuery } from "../../store/api/usersApi";
 import s from './style.module.css';

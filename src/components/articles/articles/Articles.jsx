@@ -18,7 +18,6 @@ function Articles() {
     const { favoriteArticles } = user;
     const fav = [...favoriteArticles];
     fav.push(id);
-    console.log(fav);
   };
 
   const removeArticle = (id) => () => deleteArticle(id);

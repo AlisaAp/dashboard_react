@@ -10,7 +10,6 @@ function ArticlesPage() {
   const isAdmin = useSelector((state) => state.authentication.isAdmin);
   return (
     <DefaultTemplate>
-
       <Row gutter={60}>
         {isAdmin ? <NewArticle /> : null}
         <Col xs={18}>
@@ -25,7 +24,6 @@ function ArticlesPage() {
 
         </Col>
       </Row>
-
     </DefaultTemplate>
   );
 }

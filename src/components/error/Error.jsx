@@ -1,5 +1,5 @@
 import React from 'react';
-import { ErrorImg } from "../../images";
+import { ErrorImg } from "../../assets/images";
 import s from './style.module.css';
 
 // eslint-disable-next-line react/prop-types

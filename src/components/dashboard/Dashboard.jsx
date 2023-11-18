@@ -7,14 +7,9 @@ import { useGetUserByIdQuery } from "../../store/api/usersApi";
 import HomeworksRating from "../charts/HomeworksRating";
 
 function Dashboard() {
-  // const [activeCourse, setActiveCourse] = useState("1");
-  // const activeCourse = useSelector((state) => state.dashboard.activeCourse);
   const userId = useSelector((state) => state.authentication.currentUser);
   const { data: userData, isLoading } = useGetUserByIdQuery(userId);
 
-  // const handleClick = (id) => {
-  //   setActiveCourse(id);
-  // };
   if (isLoading) {
     return (
       <Row gutter={30}>

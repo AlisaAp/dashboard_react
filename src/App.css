@@ -8,6 +8,12 @@
     flex-direction: row;
 }
 
+.auth-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .rs-content {
     background-color: #f3f1f1;
@@ -18,7 +24,7 @@
     background-color: white;
     transition: linear 0.3s;
     border-radius: 9px;
-  margin-top: 30px;
+    margin-top: 30px;
 }
 
 .rs-panel-title {
@@ -29,22 +35,21 @@
 .rs-panel:hover {
     box-shadow: 0px 0px 12px 4px rgb(243, 212, 212);
 }
+
 .rs-carousel-placement-bottom .rs-carousel-toolbar {
     bottom: 5px;
 }
+
 .rs-carousel-slider-after, .rs-carousel-slider-item {
     background: transparent;
 }
-.auth-container {
-    background-color: #D2E9E9;
-    height: 100vh;
-    position: relative;
-}
+
 
 @media screen and (max-width: 768px) {
     .rs-content {
         padding: 10px 20px;
     }
+
     .rs-panel {
         border-radius: 5px;
         margin-top: 10px;

@@ -5,7 +5,6 @@ import DefaultTemplate from "../templates/DefaultTemplate";
 
 function ProfilePage() {
   return (
-
     <DefaultTemplate>
       <Row>
         <Profile />
